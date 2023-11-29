@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Sparta_Week1_BMI</string>
+
+    <string name="level1_info">저체중입니다.</string>
+    <string name="level2_info">정상입니다.</string>
+    <string name="level3_info">과체중입니다.</string>
+    <string name="level4_info">비만입니다.</string>
+    <string name="level5_info">고도비만입니다.</string>
+</resources>

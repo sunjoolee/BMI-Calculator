@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="level1_text_color">#00BCD4</color>
+    <color name="level2_text_color">#8BC34A</color>
+    <color name="level3_text_color">#FFEB3B</color>
+    <color name="level4_text_color">#FF9800</color>
+    <color name="level5_text_color">#FF5722</color>
+</resources>
