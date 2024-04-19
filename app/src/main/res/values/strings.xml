@@ -1,9 +1,20 @@
 <resources>
-    <string name="app_name">Sparta_Week1_BMI</string>
+    <string name="app_name">BMI 계산기</string>
 
+
+
+    <string name="main_tv_title">BMI 계산기</string>
+    <string name="main_tv_height">신장</string>
+    <string name="main_tv_height_digit">cm</string>
+    <string name="main_tv_weight">체중</string>
+    <string name="main_tv_weight_digit">kg</string>
+    <string name="main_btn_calculate">계산하기</string>
+
+    <string name="result_tv_title">당신의 BMI 계산 결과는?</string>
     <string name="level1_info">저체중입니다.</string>
     <string name="level2_info">정상입니다.</string>
     <string name="level3_info">과체중입니다.</string>
     <string name="level4_info">비만입니다.</string>
     <string name="level5_info">고도비만입니다.</string>
+    <string name="result_btn_back">돌아가기</string>
 </resources>
