@@ -53,7 +53,7 @@ fun ResultScreen(
                     resultScreenStateHolder = resultScreenStateHolder
                 )
                 BackButton(
-                    onClick = {navController.navigate("main_screen")}
+                    onClick = {navController.navigate("first_screen")}
                 )
             }
         }
