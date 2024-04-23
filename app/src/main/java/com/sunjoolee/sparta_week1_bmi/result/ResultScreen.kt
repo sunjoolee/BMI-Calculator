@@ -35,8 +35,8 @@ fun ResultScreen(
 ) {
     val resultScreenStateHolder = remember{
         ResultScreenStateHolder(
-            mainViewModel.height.value!!,
-            mainViewModel.weight.value!!
+            mainViewModel.height.value?: 0.0,
+            mainViewModel.weight.value?: 0.0
         )
     }
     MaterialTheme {
@@ -81,7 +81,7 @@ fun ResultContent(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ){
-        Text(text = resultScreenStateHolder.bmiValue.toString())
+        Text(text = resultScreenStateHolder.getBmiValue())
         Text(text = LocalContext.current.getString(resultScreenStateHolder.bmiInfoId))
         Image(
             painter = painterResource(id = resultScreenStateHolder.bmiEmojiId),
