@@ -1,8 +1,6 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.first
 
-import android.util.Log
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,9 +24,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.sunjoolee.sparta_week1_bmi.MainViewModel
+import com.sunjoolee.sparta_week1_bmi.R
 
 @Composable
-fun MainScreen(
+fun FirstScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     mainViewModel: MainViewModel

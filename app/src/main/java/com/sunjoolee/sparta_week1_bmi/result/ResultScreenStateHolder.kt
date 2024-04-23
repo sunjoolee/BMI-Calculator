@@ -1,9 +1,9 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.result
 
-import android.content.Context
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.sunjoolee.sparta_week1_bmi.R
 import kotlin.math.round
 
 class ResultScreenStateHolder(height: Double, weight: Double) {

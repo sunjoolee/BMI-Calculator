@@ -1,11 +1,8 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.result
 
-import android.content.Context
-import android.window.BackEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.sunjoolee.sparta_week1_bmi.MainViewModel
+import com.sunjoolee.sparta_week1_bmi.R
 
 
 @Composable
