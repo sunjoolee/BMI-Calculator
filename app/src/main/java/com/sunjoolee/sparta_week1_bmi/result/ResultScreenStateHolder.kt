@@ -20,7 +20,8 @@ class ResultScreenStateHolder(height: Float, weight: Float) {
     var bmiEmojiId: Int = 0
 
     init {
-        bmi = (weight / (height * height)).run { round(this * 10.0F) / 10.0F }
+        Log.d("ResultScreenStateHolder", "height: $height, weight: $weight")
+        bmi = (weight / (height * height) * 10000F).run { round(this * 10.0F) / 10.0F }
         Log.d("ResultScreenStateHolder", "bmi: $bmi")
 
         when (bmi) {
