@@ -1,17 +1,24 @@
 package com.sunjoolee.sparta_week1_bmi.first
 
-class FirstScreenStateHolder{
-    private var height:Float = 0.0F
-    private var weight:Float = 0.0F
+import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 
-    fun getHeight() = height
-    fun setHeight(heightInput: String){
-        if(heightInput.isNotBlank())
-            height= heightInput.toFloat()
+class FirstScreenStateHolder{
+    val heightState = mutableStateOf("")
+    val weightState = mutableStateOf("")
+
+    fun setHeightState(heightInput: String){
+        heightState.value = heightInput
     }
-    fun getWeight() = weight
-    fun setWeight(weightInput:String){
-        if(weightInput.isNotBlank())
-            weight = weightInput.toFloat()
+    fun setWeightState(weightInput:String){
+        weightState.value = weightInput
+    }
+
+    fun isInputValid(input:String):Boolean =
+        (input.isEmpty() || input.matches(Regex("""^[1-9]+[0-9]*[.]?[0-9]*$""")))
+
+    fun isCalculateButtonEnabled(): Boolean {
+        Log.d("FirstScreenStateHolder", "isCalculateButtonEnabled) called" )
+        return (heightState.value.isNotBlank() && weightState.value.isNotBlank())
     }
 }

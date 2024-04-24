@@ -6,6 +6,7 @@
     <string name="main_tv_height_digit">cm</string>
     <string name="main_tv_weight">체중</string>
     <string name="main_tv_weight_digit">kg</string>
+    <string name="main_tf_not_valid">유효한 입력값이 아닙니다!</string>
     <string name="main_btn_calculate">계산하기</string>
 
     <string name="result_tv_title">당신의 BMI 계산 결과는?</string>

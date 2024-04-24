@@ -25,7 +25,7 @@ class ResultScreenStateHolder(height: Float, weight: Float) {
         Log.d("ResultScreenStateHolder", "bmi: $bmi")
 
         when (bmi) {
-            in 12.0..18.4 -> {
+            in 0.0..18.4 -> {
                 bmiInfoId = R.string.result_level_under
                 bmiInfoTextColorId = R.color.level1_text_color
                 bmiEmojiId = R.drawable.bmi1
@@ -49,13 +49,13 @@ class ResultScreenStateHolder(height: Float, weight: Float) {
                 bmiEmojiId = R.drawable.bmi4
             }
 
-            in 40.0..42.0 -> {
+            in 40.0F .. Float.MAX_VALUE -> {
                 bmiInfoId = R.string.result_level_extreme
                 bmiInfoTextColorId = R.color.level5_text_color
                 bmiEmojiId = R.drawable.bmi5
             }
 
-            else -> {
+            else -> { // not reached
                 bmiInfoId = R.string.result_level_wrong
                 bmiInfoTextColorId = R.color.level5_text_color
                 bmiEmojiId = R.drawable.bmi5
