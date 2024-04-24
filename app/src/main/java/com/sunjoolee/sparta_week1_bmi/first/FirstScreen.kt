@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,22 +18,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.sunjoolee.sparta_week1_bmi.MainViewModel
 import com.sunjoolee.sparta_week1_bmi.R
 
 @Composable
 fun FirstScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
-    mainViewModel: MainViewModel
+    navToResult: (Float, Float) -> Unit
 ) {
+    val firstScreenStateHolder = remember{
+        FirstScreenStateHolder()
+    }
+
     MaterialTheme {
         Surface(
             modifier = modifier.fillMaxSize()
@@ -43,11 +47,16 @@ fun FirstScreen(
             ) {
                 MainTitle()
                 MainContent(
-                    onHeightChange = mainViewModel::setHeight,
-                    onWeightChange = mainViewModel::setWeight
+                    onHeightChange = firstScreenStateHolder::setHeight,
+                    onWeightChange = firstScreenStateHolder::setWeight
                 )
                 CalculateButton(
-                    onClick = {navController.navigate("result_screen")}
+                    onClick = {
+                        navToResult(
+                            firstScreenStateHolder.getHeight(),
+                            firstScreenStateHolder.getWeight()
+                        )
+                    }
                 )
             }
         }
@@ -59,7 +68,9 @@ fun MainTitle(
     modifier: Modifier = Modifier
 ) {
     Text(
-        modifier = modifier.padding(top = 80.dp).paddingFromBaseline(bottom = 20.dp),
+        modifier = modifier
+            .padding(top = 80.dp)
+            .paddingFromBaseline(bottom = 20.dp),
         text = LocalContext.current.getString(R.string.main_tv_title),
         color = MaterialTheme.colorScheme.primary,
         style = MaterialTheme.typography.headlineLarge
@@ -123,12 +134,15 @@ fun MeasureInput(
             style = MaterialTheme.typography.bodyLarge
         )
         TextField(
-            modifier = modifier.width(200.dp).height(120.dp),
+            modifier = modifier
+                .width(200.dp)
+                .height(80.dp),
             value = inputState.value,
             onValueChange = {
                 inputState.value = it
                 onValueChange.invoke(it)
-            }
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
         Text(
             text = context.getString(measureDigitId),

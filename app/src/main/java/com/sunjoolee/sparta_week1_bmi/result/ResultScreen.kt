@@ -22,22 +22,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.sunjoolee.sparta_week1_bmi.MainViewModel
 import com.sunjoolee.sparta_week1_bmi.R
 
 
 @Composable
 fun ResultScreen(
     modifier: Modifier = Modifier,
-    navController: NavController,
-    mainViewModel: MainViewModel
+    navToFirst: () -> Unit,
+    height:Float = 0.0F,
+    weight:Float = 0.0F
 ) {
     val resultScreenStateHolder = remember{
-        ResultScreenStateHolder(
-            mainViewModel.height.value?: 0.0,
-            mainViewModel.weight.value?: 0.0
-        )
+        ResultScreenStateHolder(height,weight)
     }
     MaterialTheme {
         Surface(
@@ -53,7 +49,7 @@ fun ResultScreen(
                     resultScreenStateHolder = resultScreenStateHolder
                 )
                 BackButton(
-                    onClick = {navController.navigate("first_screen")}
+                    onClick = navToFirst
                 )
             }
         }
@@ -111,7 +107,7 @@ fun BackButton(
 @Composable
 fun ResultScreenPreview() {
     val resultScreenStateHolder = remember{
-        ResultScreenStateHolder(170.0,60.0)
+        ResultScreenStateHolder(170.0F,60.0F)
     }
     MaterialTheme {
         Surface(
