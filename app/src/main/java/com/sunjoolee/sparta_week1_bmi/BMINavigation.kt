@@ -1,11 +1,9 @@
 package com.sunjoolee.sparta_week1_bmi
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.HEIGHT_ARG
 import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.WEIGHT_ARG
-import com.sunjoolee.sparta_week1_bmi.BMIDestinations.RESULT_ROUTE
 import com.sunjoolee.sparta_week1_bmi.BMIScreens.FIRST_SCREEN
 import com.sunjoolee.sparta_week1_bmi.BMIScreens.RESULT_SCREEN
 
