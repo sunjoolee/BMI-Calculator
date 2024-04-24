@@ -26,7 +26,7 @@ object BMIDestinations{
 
 class BMINavigationActions(private val navController: NavHostController) {
     fun navigateToFirst(){
-        navController.navigate(BMIDestinations.FIRST_ROUTE){
+        navController.navigate(FIRST_SCREEN){
             popUpTo(navController.graph.findStartDestination().id){
                 inclusive = true
             }
