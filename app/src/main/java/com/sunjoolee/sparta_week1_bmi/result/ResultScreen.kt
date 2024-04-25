@@ -7,6 +7,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
@@ -22,6 +23,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sunjoolee.sparta_week1_bmi.R
+import kotlinx.coroutines.delay
 
 
 @Composable
@@ -110,22 +114,23 @@ fun RotatingText(
     text: String,
     textColor: Int
 ) {
-    val textRotationState = remember {
-        MutableTransitionState(RotationState.BeforeRotation)
+    val textRotationState = remember { MutableTransitionState(RotationState.BeforeRotation) }
+    LaunchedEffect(Unit) {
+        textRotationState.targetState = RotationState.AfterRotation
     }
-    textRotationState.targetState = RotationState.AfterRotation
 
     val rotationTransition = updateTransition(
-        targetState = textRotationState, label = "rotate_text"
+        transitionState = textRotationState,
+        label = "rotate_text"
     )
     val rotation = rotationTransition.animateFloat(
         label = "rotate_text",
         transitionSpec = {
-            tween(1000)
+            tween(3000)
         },
         targetValueByState = { state ->
-            when (state.targetState) {
-                RotationState.BeforeRotation -> 180F
+            when (state) {
+                RotationState.BeforeRotation -> 360F
                 RotationState.AfterRotation -> 0F
             }
         }
@@ -136,16 +141,14 @@ fun RotatingText(
         color = Color(textColor),
         modifier = Modifier
             .graphicsLayer(
-                rotationX = rotation.value
+                rotationX = rotation.value,
+                rotationY = rotation.value
             )
             .clickable {
-                Log.d("ResultScreen", "currentState: ${textRotationState.currentState.toString()}, " +
-                        "targetState: ${textRotationState.targetState.toString()}")
-                textRotationState.targetState =
-                    if(textRotationState.targetState == RotationState.BeforeRotation)
-                        RotationState.AfterRotation
-                    else
-                        RotationState.BeforeRotation
+                with(textRotationState) {
+                    targetState = if(currentState == RotationState.AfterRotation) RotationState.BeforeRotation
+                    else RotationState.AfterRotation
+                }
             }
     )
 }
