@@ -94,16 +94,17 @@ fun ResultContent(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        PulsingImage(resultScreenStateHolder.bmiEmojiId)
+        with(resultScreenStateHolder) {
+            PulsingImage(getBmiInfoImageId())
 
-        Text(text = resultScreenStateHolder.getBmiValue())
+            Text(text = getBmiValue())
+            RotatingText(
+                text = LocalContext.current.getString(getBmiInfoId()),
+                textColor = LocalContext.current.getColor(getBmiInfoTextColorId())
+            )
 
-        RotatingText(
-            text = LocalContext.current.getString(resultScreenStateHolder.bmiInfoId),
-            textColor = LocalContext.current.getColor(resultScreenStateHolder.bmiInfoTextColorId)
-        )
-
-        ResultPanel(targetDegree = resultScreenStateHolder.resultPanelTargetDegree)
+            ResultPanel(targetDegree = getBmiInfoArrowDegree())
+        }
     }
 }
 
