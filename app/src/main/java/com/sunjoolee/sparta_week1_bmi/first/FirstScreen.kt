@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,6 +29,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.widget.Placeholder
 import com.sunjoolee.sparta_week1_bmi.R
 
 @Composable
@@ -93,6 +95,7 @@ fun MainContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HeightInput(modifier, checkIfInputValid, onHeightChange)
+        Spacer(modifier = Modifier.padding(8.dp))
         WeightInput(modifier, checkIfInputValid, onWeightChange)
     }
 }
@@ -145,12 +148,13 @@ fun MeasureInput(
     ) {
         Text(
             text = context.getString(measureTitleId),
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = modifier.padding(end=10.dp).width(50.dp)
         )
         TextField(
             modifier = modifier
-                .width(200.dp)
-                .height(80.dp),
+                .width(160.dp)
+                .height(60.dp),
             value = inputState.value,
             onValueChange = {
                 if (checkIfInputValid(it)) {
@@ -164,7 +168,8 @@ fun MeasureInput(
         )
         Text(
             text = context.getString(measureDigitId),
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.headlineSmall,
+            modifier = modifier.padding(start=10.dp).width(50.dp)
         )
     }
 }
