@@ -19,6 +19,8 @@ class ResultScreenStateHolder(height: Float, weight: Float) {
     @DrawableRes
     var bmiEmojiId: Int = 0
 
+    var resultPanelTargetDegree:Float = 0.0F
+
     init {
         Log.d("ResultScreenStateHolder", "height: $height, weight: $weight")
         bmi = (weight / (height * height) * 10000F).run { round(this * 10.0F) / 10.0F }
@@ -29,36 +31,42 @@ class ResultScreenStateHolder(height: Float, weight: Float) {
                 bmiInfoId = R.string.result_level_under
                 bmiInfoTextColorId = R.color.level1_text_color
                 bmiEmojiId = R.drawable.result_bmi_under
+                resultPanelTargetDegree = -225F
             }
 
             in 18.5..24.9 -> {
                 bmiInfoId = R.string.result_level_normal
                 bmiInfoTextColorId = R.color.level2_text_color
                 bmiEmojiId = R.drawable.result_bmi_normal
+                resultPanelTargetDegree = -180F
             }
 
             in 25.0..29.9 -> {
                 bmiInfoId = R.string.result_level_over
                 bmiInfoTextColorId = R.color.level3_text_color
                 bmiEmojiId = R.drawable.result_bmi_over
+                resultPanelTargetDegree = -135F
             }
 
             in 30.0..39.9 -> {
                 bmiInfoId = R.string.result_level_obese
                 bmiInfoTextColorId = R.color.level4_text_color
                 bmiEmojiId = R.drawable.result_bmi_obese
+                resultPanelTargetDegree = -90F
             }
 
             in 40.0F .. Float.MAX_VALUE -> {
                 bmiInfoId = R.string.result_level_extreme
                 bmiInfoTextColorId = R.color.level5_text_color
                 bmiEmojiId = R.drawable.result_bmi_extreme
+                resultPanelTargetDegree = -45F
             }
 
             else -> { // not reached
                 bmiInfoId = R.string.result_level_wrong
                 bmiInfoTextColorId = R.color.level5_text_color
                 bmiEmojiId = R.drawable.result_bmi_extreme
+                resultPanelTargetDegree = 0.0F
             }
         }
     }

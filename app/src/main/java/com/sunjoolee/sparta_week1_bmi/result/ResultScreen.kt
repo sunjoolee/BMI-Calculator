@@ -1,42 +1,43 @@
 package com.sunjoolee.sparta_week1_bmi.result
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sunjoolee.sparta_week1_bmi.R
-import kotlinx.coroutines.delay
 
 
 @Composable
@@ -93,20 +94,22 @@ fun ResultContent(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        with(resultScreenStateHolder.getBmiValue()) {
-            if (this.isNotBlank()) Text(text = this)
-        }
+        PulsingImage(resultScreenStateHolder.bmiEmojiId)
+
+        Text(text = resultScreenStateHolder.getBmiValue())
+
         RotatingText(
             text = LocalContext.current.getString(resultScreenStateHolder.bmiInfoId),
             textColor = LocalContext.current.getColor(resultScreenStateHolder.bmiInfoTextColorId)
         )
-        PulsingImage(resultScreenStateHolder.bmiEmojiId)
+
+        ResultPanel(targetDegree = resultScreenStateHolder.resultPanelTargetDegree)
     }
 }
 
 enum class RotationState {
-    BeforeRotation,
-    AfterRotation
+    BEFORE,
+    AFTER
 }
 
 @Composable
@@ -114,9 +117,9 @@ fun RotatingText(
     text: String,
     textColor: Int
 ) {
-    val textRotationState = remember { MutableTransitionState(RotationState.BeforeRotation) }
+    val textRotationState = remember { MutableTransitionState(RotationState.BEFORE) }
     LaunchedEffect(Unit) {
-        textRotationState.targetState = RotationState.AfterRotation
+        textRotationState.targetState = RotationState.AFTER
     }
 
     val rotationTransition = updateTransition(
@@ -130,8 +133,8 @@ fun RotatingText(
         },
         targetValueByState = { state ->
             when (state) {
-                RotationState.BeforeRotation -> 360F
-                RotationState.AfterRotation -> 0F
+                RotationState.BEFORE -> 360F
+                RotationState.AFTER -> 0F
             }
         }
     )
@@ -146,8 +149,9 @@ fun RotatingText(
             )
             .clickable {
                 with(textRotationState) {
-                    targetState = if(currentState == RotationState.AfterRotation) RotationState.BeforeRotation
-                    else RotationState.AfterRotation
+                    targetState =
+                        if (currentState == RotationState.AFTER) RotationState.BEFORE
+                        else RotationState.AFTER
                 }
             }
     )
@@ -192,6 +196,65 @@ fun BackButton(
         Text(text = LocalContext.current.getString(R.string.result_btn_back))
     }
 }
+
+
+enum class ResultPanelState {
+    BEFORE,
+    AFTER
+}
+
+@Composable
+fun ResultPanel(
+    modifier: Modifier = Modifier,
+    targetDegree: Float
+) {
+    val resultPanelState = remember { MutableTransitionState(ResultPanelState.BEFORE) }
+    LaunchedEffect(Unit) {
+        resultPanelState.targetState = ResultPanelState.AFTER
+    }
+
+    val panelTransition = updateTransition(
+        transitionState = resultPanelState, label = "rotate_panel"
+    )
+    val panelDegree = panelTransition.animateFloat(
+        label = "rotate_panel",
+        transitionSpec = { tween(1500) },
+        targetValueByState = { state ->
+            when (state) {
+                ResultPanelState.BEFORE -> -225F
+                ResultPanelState.AFTER -> targetDegree
+            }
+        }
+    )
+
+    Box(
+        modifier = modifier
+            .width(150.dp)
+            .height(150.dp)
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.result_panel),
+            contentDescription = "",
+            modifier = modifier.align(Alignment.BottomCenter)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.result_panel_arrow),
+            contentDescription = "",
+            modifier = modifier
+                .align(Alignment.BottomCenter)
+                .padding(start = 32.dp)
+                .scale(0.5F)
+                .graphicsLayer(
+                    rotationZ = panelDegree.value,
+                    transformOrigin = TransformOrigin(
+                        pivotFractionX = 0.26F,
+                        pivotFractionY = 0.44F
+                    )
+                )
+        )
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
