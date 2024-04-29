@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.widget.Placeholder
 import com.sunjoolee.sparta_week1_bmi.R
+import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTheme
 
 @Composable
 fun FirstScreen(
@@ -41,7 +42,7 @@ fun FirstScreen(
         FirstScreenStateHolder()
     }
 
-    MaterialTheme {
+    AppTheme {
         Surface(
             modifier = modifier.fillMaxSize()
         ) {
@@ -149,7 +150,9 @@ fun MeasureInput(
         Text(
             text = context.getString(measureTitleId),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = modifier.padding(end=10.dp).width(50.dp)
+            modifier = modifier
+                .padding(end = 10.dp)
+                .width(50.dp)
         )
         TextField(
             modifier = modifier
@@ -169,7 +172,9 @@ fun MeasureInput(
         Text(
             text = context.getString(measureDigitId),
             style = MaterialTheme.typography.headlineSmall,
-            modifier = modifier.padding(start=10.dp).width(50.dp)
+            modifier = modifier
+                .padding(start = 10.dp)
+                .width(50.dp)
         )
     }
 }
@@ -198,8 +203,9 @@ fun CalculateButton(
 fun MainScreenPreview(
     modifier: Modifier = Modifier
 ) {
-    MaterialTheme {
+    AppTheme {
         Surface(
+            tonalElevation = 2.dp,
             modifier = modifier.fillMaxSize()
         ) {
             Column(

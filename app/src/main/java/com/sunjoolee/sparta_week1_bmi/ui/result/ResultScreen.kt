@@ -38,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sunjoolee.sparta_week1_bmi.R
+import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTheme
 
 
 @Composable
@@ -50,7 +51,7 @@ fun ResultScreen(
     val resultScreenStateHolder = remember {
         ResultScreenStateHolder(height, weight)
     }
-    MaterialTheme {
+    AppTheme {
         Surface(
             modifier = modifier.fillMaxSize()
         ) {
@@ -259,21 +260,22 @@ fun ResultPanel(
 @Composable
 fun ResultScreenPreview() {
     val resultScreenStateHolder = remember {
-        ResultScreenStateHolder(170.0F, 60.0F)
+        ResultScreenStateHolder(170F,70F)
     }
-    MaterialTheme {
+    AppTheme {
         Surface(
+            tonalElevation = 2.dp,
             modifier = Modifier.fillMaxSize()
         ) {
             Column(
-                verticalArrangement = Arrangement.Center
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 ResultTitle()
                 ResultContent(
                     resultScreenStateHolder = resultScreenStateHolder
                 )
                 BackButton(
-                    onClick = {}
+                    onClick = { }
                 )
             }
         }
