@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi.result
+package com.sunjoolee.sparta_week1_bmi.ui.result
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.MutableTransitionState
@@ -210,9 +210,7 @@ fun ResultPanel(
     targetDegree: Float
 ) {
     val resultPanelState = remember { MutableTransitionState(ResultPanelState.BEFORE) }
-    LaunchedEffect(Unit) {
-        resultPanelState.targetState = ResultPanelState.AFTER
-    }
+    resultPanelState.targetState = ResultPanelState.AFTER
 
     val panelTransition = updateTransition(
         transitionState = resultPanelState, label = "rotate_panel"

@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi.first
+package com.sunjoolee.sparta_week1_bmi.ui.first
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

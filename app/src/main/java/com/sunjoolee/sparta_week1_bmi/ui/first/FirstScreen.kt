@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi.first
+package com.sunjoolee.sparta_week1_bmi.ui.first
 
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -51,7 +51,7 @@ fun FirstScreen(
             ) {
                 MainTitle()
                 MainContent(
-                    checkIfInputValid = { input: String -> firstScreenStateHolder.isInputValid(input) },
+                    checkIfInputValid = firstScreenStateHolder::isInputValid,
                     onHeightChange = firstScreenStateHolder::setHeightState,
                     onWeightChange = firstScreenStateHolder::setWeightState
                 )

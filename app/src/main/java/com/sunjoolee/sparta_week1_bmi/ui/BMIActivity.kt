@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

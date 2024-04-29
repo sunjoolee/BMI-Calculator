@@ -1,11 +1,11 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.ui
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.HEIGHT_ARG
-import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.WEIGHT_ARG
-import com.sunjoolee.sparta_week1_bmi.BMIScreens.FIRST_SCREEN
-import com.sunjoolee.sparta_week1_bmi.BMIScreens.RESULT_SCREEN
+import com.sunjoolee.sparta_week1_bmi.ui.BMIDestinationArgs.HEIGHT_ARG
+import com.sunjoolee.sparta_week1_bmi.ui.BMIDestinationArgs.WEIGHT_ARG
+import com.sunjoolee.sparta_week1_bmi.ui.BMIScreens.FIRST_SCREEN
+import com.sunjoolee.sparta_week1_bmi.ui.BMIScreens.RESULT_SCREEN
 
 private object BMIScreens{
     const val FIRST_SCREEN = "first_screen"

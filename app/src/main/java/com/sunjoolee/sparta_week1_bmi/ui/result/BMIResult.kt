@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi.result
+package com.sunjoolee.sparta_week1_bmi.ui.result
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes

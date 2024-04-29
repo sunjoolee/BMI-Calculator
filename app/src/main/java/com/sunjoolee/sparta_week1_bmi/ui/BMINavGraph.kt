@@ -1,4 +1,4 @@
-package com.sunjoolee.sparta_week1_bmi
+package com.sunjoolee.sparta_week1_bmi.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -9,10 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.HEIGHT_ARG
-import com.sunjoolee.sparta_week1_bmi.BMIDestinationArgs.WEIGHT_ARG
-import com.sunjoolee.sparta_week1_bmi.first.FirstScreen
-import com.sunjoolee.sparta_week1_bmi.result.ResultScreen
+import com.sunjoolee.sparta_week1_bmi.ui.BMIDestinationArgs.HEIGHT_ARG
+import com.sunjoolee.sparta_week1_bmi.ui.BMIDestinationArgs.WEIGHT_ARG
+import com.sunjoolee.sparta_week1_bmi.ui.first.FirstScreen
+import com.sunjoolee.sparta_week1_bmi.ui.result.ResultScreen
 
 @Composable
 fun BMINavGraph(
