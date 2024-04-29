@@ -39,6 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sunjoolee.sparta_week1_bmi.R
 import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTheme
+import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTypography
+import com.sunjoolee.sparta_week1_bmi.ui.theme.fontFamily
 
 
 @Composable
@@ -81,8 +83,7 @@ fun ResultTitle(
             .padding(top = 80.dp)
             .paddingFromBaseline(bottom = 20.dp),
         text = LocalContext.current.getString(R.string.result_tv_title),
-        color = MaterialTheme.colorScheme.primary,
-        style = MaterialTheme.typography.headlineLarge
+        style = AppTypography.headlineLarge
     )
 }
 
@@ -101,7 +102,7 @@ fun ResultContent(
             Text(text = getBmiValue())
             RotatingText(
                 text = LocalContext.current.getString(getBmiInfoId()),
-                textColor = LocalContext.current.getColor(getBmiInfoTextColorId())
+                textColor = LocalContext.current.getColor(getBmiInfoTextColorId()),
             )
 
             ResultPanel(targetDegree = getBmiInfoArrowDegree())
@@ -155,7 +156,8 @@ fun RotatingText(
                         if (currentState == RotationState.AFTER) RotationState.BEFORE
                         else RotationState.AFTER
                 }
-            }
+            },
+        style = AppTypography.headlineSmall
     )
 }
 
@@ -195,7 +197,7 @@ fun BackButton(
         modifier = modifier.padding(top = 20.dp),
         onClick = onClick
     ) {
-        Text(text = LocalContext.current.getString(R.string.result_btn_back))
+        Text(text = LocalContext.current.getString(R.string.result_btn_back), fontFamily = fontFamily)
     }
 }
 

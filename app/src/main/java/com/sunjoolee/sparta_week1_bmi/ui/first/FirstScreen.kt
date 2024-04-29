@@ -1,5 +1,6 @@
 package com.sunjoolee.sparta_week1_bmi.ui.first
 
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -14,11 +15,11 @@ import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,12 +27,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.googlefonts.isAvailableOnDevice
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.widget.Placeholder
 import com.sunjoolee.sparta_week1_bmi.R
 import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTheme
+import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTypography
+import com.sunjoolee.sparta_week1_bmi.ui.theme.fontFamily
+import com.sunjoolee.sparta_week1_bmi.ui.theme.provider
 
 @Composable
 fun FirstScreen(
@@ -40,6 +44,13 @@ fun FirstScreen(
 ) {
     val firstScreenStateHolder = remember {
         FirstScreenStateHolder()
+    }
+
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        if (provider.isAvailableOnDevice(context)) {
+            Log.d("FirstScreen", "Google Font Provider Success!")
+        }
     }
 
     AppTheme {
@@ -79,8 +90,7 @@ fun MainTitle(
             .padding(top = 80.dp)
             .paddingFromBaseline(bottom = 20.dp),
         text = LocalContext.current.getString(R.string.main_tv_title),
-        color = MaterialTheme.colorScheme.primary,
-        style = MaterialTheme.typography.headlineLarge
+        style = AppTypography.headlineLarge
     )
 }
 
@@ -149,7 +159,7 @@ fun MeasureInput(
     ) {
         Text(
             text = context.getString(measureTitleId),
-            style = MaterialTheme.typography.headlineSmall,
+            style = AppTypography.headlineSmall,
             modifier = modifier
                 .padding(end = 10.dp)
                 .width(50.dp)
@@ -171,7 +181,7 @@ fun MeasureInput(
         )
         Text(
             text = context.getString(measureDigitId),
-            style = MaterialTheme.typography.headlineSmall,
+            style = AppTypography.headlineSmall,
             modifier = modifier
                 .padding(start = 10.dp)
                 .width(50.dp)
@@ -194,7 +204,10 @@ fun CalculateButton(
         enabled = isEnabled.value,
         onClick = onClick
     ) {
-        Text(text = LocalContext.current.getString(R.string.main_btn_calculate))
+        Text(
+            text = LocalContext.current.getString(R.string.main_btn_calculate),
+            fontFamily = fontFamily
+        )
     }
 }
 
