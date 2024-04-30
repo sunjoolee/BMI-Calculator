@@ -23,10 +23,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.text.googlefonts.isAvailableOnDevice
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +39,8 @@ import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTheme
 import com.sunjoolee.sparta_week1_bmi.ui.theme.AppTypography
 import com.sunjoolee.sparta_week1_bmi.ui.theme.fontFamily
 import com.sunjoolee.sparta_week1_bmi.ui.theme.provider
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
 fun FirstScreen(
@@ -46,10 +51,20 @@ fun FirstScreen(
         FirstScreenStateHolder()
     }
 
+    // test if google font provider is available
     val context = LocalContext.current
     LaunchedEffect(Unit) {
         if (provider.isAvailableOnDevice(context)) {
             Log.d("FirstScreen", "Google Font Provider Success!")
+        }
+    }
+
+    // pre-load downloadable fonts
+    val fontFamilyResolver = LocalFontFamilyResolver.current
+    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        coroutineScope.launch(Dispatchers.IO) {
+            fontFamilyResolver.preload(fontFamily)
         }
     }
 
